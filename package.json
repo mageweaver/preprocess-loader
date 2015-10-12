@@ -1,5 +1,5 @@
 {
-  "name": "preprocess-loader",
+  "name": "preprocessor-loader",
   "version": "1.0.0",
   "description": "Preprocessor loader for webpack.  Allows for regular expressions, callbacks, macros, similiar to the C preprocessor",
   "main": "preprocess-loader.js",
