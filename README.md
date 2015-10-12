@@ -1,3 +1,6 @@
+**To install npm install preprocessor-loader**
+preprocess-loader was takened already =(.
+
 The preprocess-loader is a loader I developed to support the [Webpack Module Bundler project](https://webpack.github.io/).  The preprocess-loader provides the ability to preprocess source files through user defined regular expressions, macros, and callback routines.  Additionally it has the ability out of the box to replace common tags like __LINE__ and __FILE__ with line number and filename.  Furthermore, all user defined logic can be applied to line scope or source scope.
 
 To simply use the __LINE__ or __FILE__ feature you can either specify it in the configuration file below or by simply adding values to the query string.
