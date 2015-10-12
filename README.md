@@ -10,7 +10,7 @@ Below is an example of using the preprocess-loader and chaining the output to ba
 ```
      {
         test: /\.jsx?$/,
-        loaders: ["babel","preprocess?line&file&config="+path.join(__dirname,'./cfg/preprocess.json')],
+        loaders: ["babel","preprocessor?line&file&config="+path.join(__dirname,'./cfg/preprocess.json')],
         exclude: /node_modules/
       },
 

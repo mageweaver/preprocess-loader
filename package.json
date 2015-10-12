@@ -1,8 +1,8 @@
 {
   "name": "preprocessor-loader",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Preprocessor loader for webpack.  Allows for regular expressions, callbacks, macros, similiar to the C preprocessor",
-  "main": "preprocess-loader.js",
+  "main": "preprocessor-loader.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
