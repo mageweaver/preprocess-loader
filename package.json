@@ -1,6 +1,6 @@
 {
   "name": "preprocessor-loader",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Preprocessor loader for webpack.  Allows for regular expressions, callbacks, macros, similiar to the C preprocessor",
   "main": "preprocessor-loader.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/artificialtrends/preprocess-loader"
   },
-  "author": "Jared Spigner",
+  "author": "Jared Spigner <digitalminotaur@gmail.com> (http://artificialtrends.com)",
   "license": "MIT",
   "devDependencies": {
     "fs": "0.0.2",
@@ -21,5 +21,17 @@
     "fs": "0.0.2",
     "loader-utils": "^0.2.11",
     "path": "^0.12.7"
-  }
+  },
+  "keywords": [
+    "webpack",
+    "loader",
+    "preprocess",
+    "preprocessor",
+    "preprocessor-loader",
+    "preprocess-loader",
+    "regular expression",
+    "regex",
+    "macro",
+    "callback"
+  ]
 }
