@@ -23,13 +23,22 @@ A sample configuration file may be found below, notice it is simply json.
 {
   "line"        : true,
   "file"        : true,
-  "macros"      : [
+  "regexes"      : [
     {
       "fileName"        : "all",
       "scope"           : "line",
       "regex"           : "__FOO__",
       "flags"           : "g",
       "value"           : "FOO"
+    }
+  ],
+  "macros"      : [
+    {
+      "fileName"        : "all",
+      "scope"           : "line",
+      "name"            : "MYMACRO(x,b)",
+      "flags"           : "g",
+      "inline"          : "function doSomething(x, b) {console.log(x+b);}"
     }
   ],
   "callbacks"   : [
@@ -46,12 +55,21 @@ A sample configuration file may be found below, notice it is simply json.
   ]
 }
 ```
-##macros are regular expressions
+##regexes are regular expressions
 1. You may specify a specific filename or "all" if you would like it to process on all files.  
 2. scope must be "line" or "source".
 3. regex is the regular expression you want to use.
 4. flags are the flags provide to a typical string.replace function or used in a regex
 5. value is the value you would like to replace the regex with
+
+
+##macros are like regular expressions (They operate in the same way)
+Except they allow for macros to be expanded inline in the code like the C preprocessor.
+1. You may specify a specific filename or "all" if you would like it to process on all files.  
+2. scope must be "line" or "source".
+3. name is the regular expression you want to use to search and replace the macro tag.
+4. flags are the flags provide to a typical string.replace function or used in a regex
+5. inline is the value you would like to replace the macro with.
 
 ##callbacks are user defined functions
 1. You may specify a specific filename or "all" if you would like it to process on all files. 
