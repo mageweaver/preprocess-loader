@@ -1,5 +1,8 @@
-**To install npm install preprocessor-loader**
-preprocess-loader was takened already =(.
+## install
+
+```
+npm install preprocessor-loader --save-dev
+```
 
 The preprocess-loader is a loader I developed to support the [Webpack Module Bundler project](https://webpack.github.io/).  The preprocess-loader provides the ability to preprocess source files through user defined regular expressions, macros, and callback routines.  Additionally it has the ability out of the box to replace common tags like __LINE__ and __FILE__ with line number and filename.  Furthermore, all user defined logic can be applied to line scope or source scope.
 
@@ -7,19 +10,18 @@ To simply use the __LINE__ or __FILE__ feature you can either specify it in the 
 
 Below is an example of using the preprocess-loader and chaining the output to babel-loader.
 
-```
+```javascript
      {
         test: /\.jsx?$/,
         loaders: ["babel","preprocessor?line&file&config="+path.join(__dirname,'./cfg/preprocess.json')],
         exclude: /node_modules/
       },
-
 ```
 
 All parameters are optional in the query string.  As previously mentioned you may optionally specify the line or file values in the configuration file.
 
 A sample configuration file may be found below, notice it is simply json.
-```
+```javascript
 {
   "line"        : true,
   "file"        : true,
@@ -83,4 +85,3 @@ Except they allow for macros to be expanded inline in the code like the C prepro
   2. fileName, which is the filename being processed
   
 **ALL CALLBACKS MUST RETURN THE LINE OR SOURCE WHEN PROCESSING IS COMPLETE**
-
