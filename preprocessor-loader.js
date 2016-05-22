@@ -45,53 +45,48 @@ module.exports = function(source) {
     opt.file = opt.cfg.file;
   }
 
-  var lineCount = 1;
-  for(var i=0;i<source.length;i++) {
-    line = line + source[i];
-
-    if(source[i]=='\n') {
-      if(opt.line) {
-        line = line.replace(new RegExp('__LINE__'),""+lineCount,'g');
-      }
-
-      if(opt.file) {
-        line = line.replace(new RegExp('__FILE__'),""+fileName,'g');
-      }
-
-      if(opt.config!==undefined && opt.cfg!==undefined && opt.cfg.regexes!==undefined) {
-        for(var x=0;x<opt.cfg.regexes.length;x++) {
-          if(opt.cfg.regexes[x].scope=="line") {
-            if(opt.cfg.regexes[x].fileName=="all" || opt.cfg.regexes[x].fileName==fileName) {
-              line = line.replace(new RegExp(opt.cfg.regexes[x].regex),opt.cfg.regexes[x].value,opt.cfg.regexes[x].flags);
-            }
-          }
-        }
-      }
-
-      if(opt.config!==undefined && opt.cfg!==undefined && opt.cfg.macros!==undefined) {
-        for(var x=0;x<opt.cfg.macros.length;x++) {
-          if(opt.cfg.macros[x].scope=="line") {
-            if(opt.cfg.macros[x].fileName=="all" || opt.cfg.macros[x].fileName==fileName) {
-              line = line.replace(new RegExp(opt.cfg.macros[x].name),opt.cfg.macros[x].inline,opt.cfg.macros[x].flags);
-            }
-          }
-        }
-      } 
-
-      if(opt.config!==undefined && opt.cfg!==undefined && opt.cfg.callbacks!==undefined) {
-        for(var x=0;x<opt.cfg.callbacks.length;x++) {
-          if(opt.cfg.callbacks[x].scope=="line" && (opt.cfg.callbacks[x].fileName=="all" || opt.cfg.callbacks[x].fileName==fileName)) {
-            var cb = eval(opt.cfg.callbacks[x].callback);
-            line = cb(line, fileName, lineCount)
-          }
-        }
-      }
-
-      content = content + line;
-      line = "";
-      lineCount++;
+  var lines = source.split('\n');
+  var lineCount = lines.length;
+  lines.forEach(function (line) {
+    if(opt.line) {
+      line = line.replace(new RegExp('__LINE__'),""+lineCount,'g');
     }
-  }
+
+    if(opt.file) {
+      line = line.replace(new RegExp('__FILE__'),""+fileName,'g');
+    }
+
+    if(opt.config!==undefined && opt.cfg!==undefined && opt.cfg.regexes!==undefined) {
+      for(var x=0;x<opt.cfg.regexes.length;x++) {
+        if(opt.cfg.regexes[x].scope=="line") {
+          if(opt.cfg.regexes[x].fileName=="all" || opt.cfg.regexes[x].fileName==fileName) {
+            line = line.replace(new RegExp(opt.cfg.regexes[x].regex),opt.cfg.regexes[x].value,opt.cfg.regexes[x].flags);
+          }
+        }
+      }
+    }
+
+    if(opt.config!==undefined && opt.cfg!==undefined && opt.cfg.macros!==undefined) {
+      for(var x=0;x<opt.cfg.macros.length;x++) {
+        if(opt.cfg.macros[x].scope=="line") {
+          if(opt.cfg.macros[x].fileName=="all" || opt.cfg.macros[x].fileName==fileName) {
+            line = line.replace(new RegExp(opt.cfg.macros[x].name),opt.cfg.macros[x].inline,opt.cfg.macros[x].flags);
+          }
+        }
+      }
+    }
+
+    if(opt.config!==undefined && opt.cfg!==undefined && opt.cfg.callbacks!==undefined) {
+      for(var x=0;x<opt.cfg.callbacks.length;x++) {
+        if(opt.cfg.callbacks[x].scope=="line" && (opt.cfg.callbacks[x].fileName=="all" || opt.cfg.callbacks[x].fileName==fileName)) {
+          var cb = eval(opt.cfg.callbacks[x].callback);
+          line = cb(line, fileName, lineCount)
+        }
+      }
+    }
+
+    content = content + line;
+  });
 
   if(opt.config!==undefined && opt.cfg!==undefined && opt.cfg.regexes!==undefined) {
     for(var i=0;i<opt.cfg.regexes.length;i++) {
