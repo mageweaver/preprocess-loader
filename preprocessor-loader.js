@@ -92,6 +92,7 @@ module.exports = function(source) {
       lineCount++;
     }
   }
+  content = content + line;
 
   if(opt.config!==undefined && opt.cfg!==undefined && opt.cfg.regexes!==undefined) {
     for(var i=0;i<opt.cfg.regexes.length;i++) {
