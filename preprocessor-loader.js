@@ -30,7 +30,11 @@ module.exports = function(source) {
 
   if(((opt.config!==undefined)?true:false)) {
     try {
-      opt.cfg = JSON.parse(fs.readFileSync(opt.config, 'utf8'));
+      if(/\.js$/.test(opt.config) {
+        opt.cfg = require(opt.config);
+      } else {
+        opt.cfg = JSON.parse(fs.readFileSync(opt.config, 'utf8'));
+      }
     }
     catch(err) {
       throw "preprocess error: "+ err;
@@ -81,7 +85,7 @@ module.exports = function(source) {
       if(opt.config!==undefined && opt.cfg!==undefined && opt.cfg.callbacks!==undefined) {
         for(var x=0;x<opt.cfg.callbacks.length;x++) {
           if(opt.cfg.callbacks[x].scope=="line" && (opt.cfg.callbacks[x].fileName=="all" || opt.cfg.callbacks[x].fileName==fileName)) {
-            var cb = eval(opt.cfg.callbacks[x].callback);
+            var cb = (typeof opt.cfg.callbacks[i].callback === "function") ? opt.cfg.callbacks[i].callback : eval(opt.cfg.callbacks[i].callback);
             line = cb(line, fileName, lineCount)
           }
         }
@@ -116,7 +120,7 @@ module.exports = function(source) {
   if(opt.config!==undefined && opt.cfg!==undefined && opt.cfg.callbacks!==undefined) {
     for(var i=0;i<opt.cfg.callbacks.length;i++) {
       if(opt.cfg.callbacks[i].scope=="source" && (opt.cfg.callbacks[i].fileName=="all" || opt.cfg.callbacks[i].fileName==fileName)) {
-        var cb = eval(opt.cfg.callbacks[i].callback);
+        var cb = (typeof opt.cfg.callbacks[i].callback === "function") ? opt.cfg.callbacks[i].callback : eval(opt.cfg.callbacks[i].callback);
         content = cb(content, fileName)
       }
     }
